@@ -6,11 +6,11 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-REAL_CSV = ROOT / "C_outputs_PSR_morphometry_002" / "PSR_crater_morphometry_001.csv"
+REAL_CSV = ROOT / "data" / "PSR_crater_morphometry_001.csv"
 RADIUS = 500.0
-CALIBRATION_CSV = f"floor_radius_calibration_R{RADIUS:g}m.csv"
-OUTPUT_CSV = f"floor_radius_K_R{RADIUS:g}m_real.csv"
-OUTPUT_PNG = f"floor_radius_K_R{RADIUS:g}m_real.png"
+CALIBRATION_CSV = ROOT/"data"/f"floor_radius_calibration_R{RADIUS:g}m.csv"
+OUTPUT_CSV = ROOT /"data"/f"floor_radius_K_R{RADIUS:g}m_real.csv"
+OUTPUT_PNG = ROOT /"plots"/f"floor_radius_K_R{RADIUS:g}m_real.png"
 
 def func(x, y0, tau, m):
     return y0 * (np.exp(-x / tau) + m * x)

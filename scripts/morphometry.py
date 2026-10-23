@@ -25,7 +25,7 @@ from xarray.groupers import BinGrouper
 scriptdir = Path(__file__).resolve().parent
 rootdir = scriptdir.parent
 datadir = rootdir / "data"
-simrootdir = rootdir / "simdata"
+simrootdir = rootdir / "simulation_directories"
 plotdir = rootdir / "plots"
 default_input_csv = datadir / "fresh_craters.csv"
 vectorfiledir = datadir / "vector_profiles"
@@ -724,7 +724,7 @@ def get_morphometry_from_binned_profile(
     print("Plotting result")
     if plotfile is None:
         filename = (
-            plotdir / "binned_profiles" / f"{crater.label}_profile.{plot_extension}"
+            plotdir / "binned_profiles" / f"{crater.label or crater.name}_profile.{plot_extension}"
         )
     else:
         filename = Path(plotfile)
@@ -2233,7 +2233,7 @@ def plot_profile(
                 elif hasattr(crater, f"{k}_std"):
                     v_std = getattr(crater, f"{k}_std")
                 else:
-                    fit_text.apend(vstr)
+                    fit_text.append(vstr)
                     continue
                 if v_std > 1e-10:
                     vstr += f" ± {v_std:.3f}"
@@ -2259,6 +2259,7 @@ def plot_profile(
 
     ax.legend(loc="upper left", fontsize=rcParams["font.size"] - 2)
     if filename is not None:
+        Path(filename).parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(filename, dpi=300)
     else:
         plt.show()
@@ -2476,7 +2477,7 @@ def save_morphometric_parameters(
                     header.append(k)
             writer.writerow(header)
         for c, popt, psig in zip(craters, popt_maps, psig_maps, strict=True):
-            row = [c.name, c.label, c.morphology_type]
+            row = [c.name, getattr(c, "label", None) or c.name, c.morphology_type]
             for k in save_vars:
                 if (c.morphology_type == "ring" and k in ringskip_var) or (
                     c.morphology_type != "ring" and k in craterskip_var

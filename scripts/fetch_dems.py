@@ -25,13 +25,17 @@ DEM_20MPP = (
     / "Barker_LOLA_tifs"
     / "LDEM_80S_20MPP_ADJ.TIF")
 
+DEM_240MPP = (
+    PROJECT_ROOT
+    / "Barker_LOLA_tifs"
+    / "LDEM_60S_240MPP_ADJ.TIF")
+
 OUTPUT_DIR = (
     PROJECT_ROOT
-    / "B_PSR_DEMs_100m_200m"
+    / "simulation_directories"
     / f"D{int(min_diameter_m)}_{int(max_diameter_m)}m")
 
-PNG_DIR = OUTPUT_DIR / "PNGs"
-
+PNG_DIR = PROJECT_ROOT / "plots" / "southpole_dems" / f"D{int(min_diameter_m)}_{int(max_diameter_m)}m"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 PNG_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -58,8 +62,9 @@ for count, (_, row) in enumerate(df.iterrows(), start=1):
         lon = float(row["longitude"])
         lat = float(row["latitude"])
 
-        dem_file = DEM_10MPP if lat <= -83.0 else DEM_20MPP
-
+        #dem_file = DEM_10MPP if lat <= -83.0 else DEM_20MPP
+        dem_file = DEM_240MPP
+        
         safe_name = (
             crater_name
             .replace(" ", "_")

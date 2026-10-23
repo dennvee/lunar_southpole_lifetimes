@@ -7,12 +7,13 @@ import pandas as pd
 from scipy.optimize import curve_fit, minimize_scalar
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = ROOT / 'morphometryv2'
+DATA_DIR = ROOT / 'data'
+PLOT_DIR = ROOT / 'plots'
 RADIUS = 500.0
-FILES = [f'morphometry_vs_K_rim_{h}m_d1000m_renormalized.csv' for h in (35, 40, 50, 60)]
-CALIBRATION_CSV = f'floor_radius_calibration_R{RADIUS:g}m.csv'
-PLOT_PNG = f'floor_radius_heteroskedastic_R{RADIUS:g}m.png'
-VARIANCE_PNG = f'floor_radius_variance_R{RADIUS:g}m.png'
+FILES = [f'morphometry_vs_K_rim_{h}m.csv' for h in (35, 40, 50, 60)]
+CALIBRATION_CSV = DATA_DIR / f'floor_radius_calibration_R{RADIUS:g}m.csv'
+PLOT_PNG = PLOT_DIR / f'floor_radius_heteroskedastic_R{RADIUS:g}m.png'
+VARIANCE_PNG = PLOT_DIR / f'floor_radius_variance_R{RADIUS:g}m.png'
 
 def func(x, y0, tau, m):
     return y0 * (np.exp(-x / tau) + m * x)

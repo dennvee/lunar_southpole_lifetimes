@@ -7,12 +7,13 @@ import pandas as pd
 from scipy.optimize import curve_fit
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = ROOT / 'morphometry'
+DATA_DIR = ROOT / 'data'
+PLOT_DIR = ROOT / 'plots'
 nominal_radius = 500.0
-files = [f'morphometry_vs_K_rim_{h}m_d1000m_renormalized.csv' for h in (35, 40, 50, 60)]
-calibration_csv = f'floor_calibration_R{nominal_radius:g}m.csv'
-plot_png = f'floor_calibration_R{nominal_radius:g}m.png'
-variance_png = f'floor_variance_R{nominal_radius:g}m.png'
+files = [f'morphometry_vs_K_rim_{h}m.csv' for h in (35, 40, 50, 60)]
+calibration_csv = DATA_DIR / f'floor_calibration_R{nominal_radius:g}m.csv'
+plot_png = PLOT_DIR / f'floor_calibration_R{nominal_radius:g}m.png'
+variance_png = PLOT_DIR / f'floor_variance_R{nominal_radius:g}m.png'
 
 def func(x, y0, a, p):
     return y0 * (a / (x + a)) ** p

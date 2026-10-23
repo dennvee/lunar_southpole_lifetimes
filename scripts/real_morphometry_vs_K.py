@@ -10,7 +10,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 CSV_FILE = (
     PROJECT_ROOT
-    / "catalogue"
+    / "catalogues"
     / "CraterHostsforPSRuniques_v2_reprojected.csv")
 
 DEM_10MPP = (
@@ -23,9 +23,11 @@ DEM_20MPP = (
     / "Barker_LOLA_tifs"
     / "LDEM_80S_20MPP_ADJ.TIF")
 
-OUTPUT_DIR = PROJECT_ROOT / "C_outputs_PSR_morphometry_003"
+OUTPUT_DIR = PROJECT_ROOT / "simulation_directories"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-OUTPUT_CSV = OUTPUT_DIR / "PSR_crater_morphometry_003.csv"
+OUTPUT_CSV = PROJECT_ROOT / "data" / "real_crater_morphometry_001.csv"
+OUTPUT_CSV.parent.mkdir(parents=True, exist_ok=True)
+(PROJECT_ROOT / "plots" / "binned_profiles").mkdir(parents=True, exist_ok=True)
 
 crater_names =[
 "HNP_743572_0381610",
