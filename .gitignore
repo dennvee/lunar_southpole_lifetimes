@@ -1,0 +1,8 @@
+*
+!.gitignore
+!README.md
+!requirements.txt
+!scripts/
+!scripts/**
+!configs/
+!configs/**
