@@ -11,16 +11,16 @@ from morphometry import save_morphometric_parameters
 
 ROOT = Path(__file__).resolve().parents[1]
 rim_height_initial = float(sys.argv[1])
-output_csv = ROOT / "data" / f"morphometry_vs_K_rim_{int(rim_height_initial)}m.csv"
+output_csv = ROOT / "data" / f"morphometry_vs_K_rim_{int(rim_height_initial)}m_002.csv"
 
 diameter = 1000
 radius = diameter / 2
 location = (0.0, 0.0)
-K_increment = 100
+K_increment = 250
 K_values = np.arange(0, 60000, K_increment)
 
 sim = cm.Simulation(
-    simdir=ROOT / "simulation_directories" / f"sim_rim_{int(rim_height_initial)}m",
+    simdir=ROOT / "simulation_directories" / f"sim_rim_{int(rim_height_initial)}m_002",
     surface="hireslocal",
     morphology="basicmoon",
     local_location=location, local_radius=2 * diameter,
@@ -96,7 +96,7 @@ plt.ylabel(r"Normalized rim height $h_{\mathrm{rim}}/R$")
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig(
-    ROOT / "plots" / f"rim_height_vs_K_rim_{int(rim_height_initial)}m.png",
+    ROOT / "plots" / f"rim_height_vs_K_rim_{int(rim_height_initial)}m_002.png",
     dpi=300)
 plt.close()
 
@@ -114,7 +114,7 @@ plt.ylabel(r"Normalized floor elevation $h_{\mathrm{floor}}/R$")
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig(
-    ROOT / "plots" / f"floor_elevation_vs_K_rim_{int(rim_height_initial)}m.png",
+    ROOT / "plots" / f"floor_elevation_vs_K_rim_{int(rim_height_initial)}m_002.png",
     dpi=300)
 plt.close()
 
@@ -132,6 +132,6 @@ plt.ylabel(r"Normalized floor radius $r_{\mathrm{floor}}/R$")
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig(
-    ROOT / "plots" / f"floor_radius_vs_K_rim_{int(rim_height_initial)}m.png",
+    ROOT / "plots" / f"floor_radius_vs_K_rim_{int(rim_height_initial)}m_002.png",
     dpi=300)
 plt.close()

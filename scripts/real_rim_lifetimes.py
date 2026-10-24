@@ -6,9 +6,9 @@ from scipy.interpolate import interp1d
 ROOT = Path(__file__).resolve().parents[1]
 nominal_radius = 500.0
 
-input_csv = ROOT / "data" / f"real_rim_K_small_R{nominal_radius:g}m.csv"
+input_csv = ROOT / "data" / f"real_rim_K_majorpsrs.csv"
 kappa_csv = ROOT / "data" / "kappa_trask_flat2.csv"
-output_csv = ROOT /"data"/ f"rim_small_lifetimes_R{nominal_radius:g}m.csv"
+output_csv = ROOT /"data"/ f"rim_lifetimes_majorpsrs.csv"
 
 real = pd.read_csv(input_csv)
 kap = pd.read_csv(kappa_csv, header=None, usecols=[0, 1], names=["D_km", "kappa"])

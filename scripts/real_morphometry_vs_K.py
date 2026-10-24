@@ -23,19 +23,24 @@ DEM_20MPP = (
     / "Barker_LOLA_tifs"
     / "LDEM_80S_20MPP_ADJ.TIF")
 
+DEM_240MPP = (
+    PROJECT_ROOT
+    / "Barker_LOLA_tifs"
+    / "LDEM_60S_240MPP_ADJ.TIF")
+
 OUTPUT_DIR = PROJECT_ROOT / "simulation_directories"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-OUTPUT_CSV = PROJECT_ROOT / "data" / "real_crater_morphometry_001.csv"
+OUTPUT_CSV = PROJECT_ROOT / "data" / "real_crater_morphometry_majorpsrs.csv"
 OUTPUT_CSV.parent.mkdir(parents=True, exist_ok=True)
 (PROJECT_ROOT / "plots" / "binned_profiles").mkdir(parents=True, exist_ok=True)
 
 crater_names= ["10-1-000838", #shoemaker
                "HNP_854024_0840253", #faustini
-               
+               "10-1-001007" #haworth
                ] 
 
 #crater_names= ["10-1-000838"]
-'''''
+''''' 100-200m craters
 crater_names =[
 "HNP_743572_0381610",
 "HNP_788526_1860292",
@@ -69,7 +74,7 @@ crater_names =[
 "HNP_843343_2242153"
 ]'''
 
-''' first batch of craters
+''' first batch of craters 1km-2km craters
 crater_names = [
     "HNP_876263_0930110",
     "HNP_877836_0822028",
@@ -135,8 +140,8 @@ for count, crater_name in enumerate(crater_names, start=1):
         radius_m = diameter_m / 2.0
         lon = float(row["longitude"])
         lat = float(row["latitude"])
-
-        dem_file = DEM_10MPP if lat <= -83.0 else DEM_20MPP
+        dem_file= DEM_240MPP
+        #dem_file = DEM_10MPP if lat <= -83.0 else DEM_20MPP
         simdir = OUTPUT_DIR / f"simdata_{crater_name}"
 
         print(f"\nProcessing {count} of {len(crater_names)}")
@@ -148,7 +153,7 @@ for count, crater_name in enumerate(crater_names, start=1):
         sim = cm.Simulation(
             surface="datasurface",
             local_location=(lon, lat),
-            local_radius=2.0 * diameter_m,
+            local_radius=0.5*diameter_m,
             simdir=str(simdir),
             reset=True,
             ask_overwrite=False,
