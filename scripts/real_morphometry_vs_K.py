@@ -29,6 +29,13 @@ OUTPUT_CSV = PROJECT_ROOT / "data" / "real_crater_morphometry_001.csv"
 OUTPUT_CSV.parent.mkdir(parents=True, exist_ok=True)
 (PROJECT_ROOT / "plots" / "binned_profiles").mkdir(parents=True, exist_ok=True)
 
+crater_names= ["10-1-000838", #shoemaker
+               "HNP_854024_0840253", #faustini
+               
+               ] 
+
+#crater_names= ["10-1-000838"]
+'''''
 crater_names =[
 "HNP_743572_0381610",
 "HNP_788526_1860292",
@@ -60,7 +67,7 @@ crater_names =[
 "HNP_840549_3039489",
 "HNP_840906_2655700",
 "HNP_843343_2242153"
-]
+]'''
 
 ''' first batch of craters
 crater_names = [

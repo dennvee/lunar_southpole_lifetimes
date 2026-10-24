@@ -18,9 +18,9 @@ csv_files = [
     "morphometry_vs_K_rim_50m.csv",
     "morphometry_vs_K_rim_60m.csv"]
 
-output_png = PLOT_DIR / f"curve_fit_rim_simulations_R{nominal_radius:g}m.png"
-variance_png = PLOT_DIR / f"rim_variance_model_R{nominal_radius:g}m.png"
-calibration_csv = DATA_DIR / f"rim_calibration_R{nominal_radius:g}m.csv"
+output_png = PLOT_DIR / f"curve_fit_rim_simulations.png"
+variance_png = PLOT_DIR / f"rim_variance_model.png"
+calibration_csv = DATA_DIR / f"rim_calibration.csv"
 
 def func(x, y0, a, p):
     return y0 * (a / (x + a)) ** p

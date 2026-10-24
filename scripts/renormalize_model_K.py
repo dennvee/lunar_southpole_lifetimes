@@ -1,12 +1,12 @@
 from pathlib import Path
 import pandas as pd
-
-data_dir = Path(__file__).resolve().parent.parent / "morphometryv2"
+ROOT = Path(__file__).resolve().parents[1]
+#data_dir = Path(__file__).resolve().parent.parent / "morphometryv2"
 rim_heights = [35, 40, 50, 60]
 
 for rim_height in rim_heights:
-    input_csv = data_dir / f"morphometry_vs_K_rim_{rim_height}m_d1000m.csv"
-    output_csv = data_dir / f"morphometry_vs_K_rim_{rim_height}m_d1000m_renormalized.csv"
+    input_csv = ROOT/ "data" / f"morphometry_vs_K_rim_{rim_height}m.csv"
+    output_csv = ROOT/ "data" / f"morphometry_vs_K_rim_{rim_height}m_renormalized.csv"
 
     df = pd.read_csv(input_csv)
     R = df["radius"]

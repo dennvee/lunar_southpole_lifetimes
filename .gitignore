@@ -4,7 +4,5 @@
 !requirements.txt
 !scripts/
 !scripts/**
-!configs/
-!configs/**
 !southpole_inputcsv
 !southpole_inputcsv/**
