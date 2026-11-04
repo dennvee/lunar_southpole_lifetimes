@@ -13,14 +13,16 @@ PLOT_DIR = ROOT / "plots"
 nominal_radius = 500.0
 
 csv_files = [
-    "morphometry_vs_K_rim_35m.csv",
-    "morphometry_vs_K_rim_40m.csv",
-    "morphometry_vs_K_rim_50m.csv",
-    "morphometry_vs_K_rim_60m.csv"]
+    "morphometry_vs_K_rim_35m_002.csv",
+    "morphometry_vs_K_rim_40m_002.csv",
+    "morphometry_vs_K_rim_45m_002.csv",
+    "morphometry_vs_K_rim_50m_002.csv",
+    "morphometry_vs_K_rim_55m_002.csv",
+    "morphometry_vs_K_rim_60m_002.csv"]
 
-output_png = PLOT_DIR / f"curve_fit_rim_simulations.png"
-variance_png = PLOT_DIR / f"rim_variance_model.png"
-calibration_csv = DATA_DIR / f"rim_calibration.csv"
+output_png = PLOT_DIR / f"curve_fit_rim_simulations_002.png"
+variance_png = PLOT_DIR / f"rim_variance_model_002.png"
+calibration_csv = DATA_DIR / f"rim_calibration_002.csv"
 
 def func(x, y0, a, p):
     return y0 * (a / (x + a)) ** p

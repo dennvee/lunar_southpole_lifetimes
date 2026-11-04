@@ -7,7 +7,7 @@ simdir = ROOT / "simulation_directories" / f"lunar_sp_seed_{rng_seed:03d}"
 
 local_location = (0.0, -90.0)
 local_radius_m = 150000
-pix = 750
+pix = 500
 
 run_age_My = 4310
 time_interval_My = 10
@@ -26,7 +26,7 @@ sim = cm.Simulation(
     simdir=simdir,
     reset=True,
     ask_overwrite=False,
-    quasimc_file=str(input_csv))
+    quasimc_file=input_csv)
 
 sim.largest_crater = largest_crater_m
 sim.run(age=run_age_My, time_interval=time_interval_My)

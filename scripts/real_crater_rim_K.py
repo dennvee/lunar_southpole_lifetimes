@@ -6,14 +6,14 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-REAL_CSV = ROOT / "data" / "real_crater_morphometry_majorpsrs.csv"
+REAL_CSV = ROOT / "data" / "real_crater_morphometry_majorpsrs_003.csv"
 # REAL_CSV = ROOT / "plaw_data" / "plaw_morphometry_for_curvefit.csv"
 
 nominal_radius = 500.0
 
-calibration_csv = ROOT /"data" /f"rim_calibration.csv"
-output_png = ROOT /"plots"/ f"real_rim_K_majorpsrs.png"
-output_csv = ROOT /"data" /f"real_rim_K_majorpsrs.csv"
+calibration_csv = ROOT /"data" /f"rim_calibration_003.csv"
+output_png = ROOT /"plots"/ f"real_rim_K_majorpsrs_003.png"
+output_csv = ROOT /"data" /f"real_rim_K_majorpsrs_00.csv"
 
 def func(x, y0, a, p):
     return y0 * (a / (x + a)) ** p

@@ -30,14 +30,16 @@ DEM_240MPP = (
 
 OUTPUT_DIR = PROJECT_ROOT / "simulation_directories"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-OUTPUT_CSV = PROJECT_ROOT / "data" / "real_crater_morphometry_majorpsrs.csv"
+OUTPUT_CSV = PROJECT_ROOT / "data" / "real_crater_morphometry_majorpsrs_003.csv"
 OUTPUT_CSV.parent.mkdir(parents=True, exist_ok=True)
 (PROJECT_ROOT / "plots" / "binned_profiles").mkdir(parents=True, exist_ok=True)
 
 crater_names= ["10-1-000838", #shoemaker
-               "HNP_854024_0840253", #faustini
-               "10-1-001007" #haworth
-               ] 
+]
+               
+ #              "HNP_854024_0840253", #faustini
+  #             "10-1-001007" #haworth
+   #            ] 
 
 #crater_names= ["10-1-000838"]
 ''''' 100-200m craters
@@ -162,16 +164,17 @@ for count, crater_name in enumerate(crater_names, start=1):
         crater = sim.Crater.maker(
             name=crater_name,
             diameter=diameter_m,
-            location=(lon, lat))
-
+            location=(lon, lat),
+            peak_height=0)
+        crater._rings= []
         fit, uncertainty = mbp(
-            sim=sim,
-            crater=crater,
+            sim=sim,crater=crater,
             fit_vars=fit_vars,
             nrbins=100,
             fit_range=(None, 1.5),
             plot_extension="png",
-            fit_rim=True )
+            fit_rim=True,
+            save_intermediate= True )
 
         fitted_radius = fit["radius"]
 
@@ -180,59 +183,34 @@ for count, crater_name in enumerate(crater_names, start=1):
             "PSR_NAME": row["PSR_NAME"],
             "longitude": lon,
             "latitude": lat,
-
             "catalogue_diameter_m": diameter_m,
             "catalogue_radius_m": radius_m,
-
             "fitted_radius_m": fit["radius"],
             "fitted_radius_std": uncertainty["radius"],
-
             "rim_height_m": fit["rim_height"],
             "rim_height_std": uncertainty["rim_height"],
             "rim_height_over_R": fit["rim_height"] / fitted_radius,
-
             "rim_width_m": fit["rim_width"],
             "rim_width_std": uncertainty["rim_width"],
-
             "floor_elevation_m": fit["floor_elevation"],
             "floor_elevation_std": uncertainty["floor_elevation"],
             "floor_elevation_over_R": (
-                fit["floor_elevation"] / fitted_radius
-            ),
-
+                fit["floor_elevation"] / fitted_radius),
             "floor_radius_m": fit["floor_radius"],
             "floor_radius_std": uncertainty["floor_radius"],
             "floor_radius_over_R": (
-                fit["floor_radius"] / fitted_radius
-            ),
-
+                fit["floor_radius"] / fitted_radius),
             "wall_curvature": fit["wall_curvature"],
             "wall_curvature_std": uncertainty["wall_curvature"],
-
             "floor_blend": fit["floor_blend"],
             "floor_blend_std": uncertainty["floor_blend"],
-
             "frac_ejrim": fit["frac_ejrim"],
             "frac_ejrim_std": uncertainty["frac_ejrim"],
-
             "ejprofile": fit["ejprofile"],
-            "ejprofile_std": uncertainty["ejprofile"]
-        })
-
+            "ejprofile_std": uncertainty["ejprofile"]})
         pd.DataFrame(results).to_csv(OUTPUT_CSV, index=False)
-        plt.close("all")
-
-        print(f"Fitted radius: {fit['radius']:.2f} m")
-        print(f"Rim height: {fit['rim_height']:.2f} m")
-        print(f"Floor elevation: {fit['floor_elevation']:.2f} m")
-        print(f"Floor radius: {fit['floor_radius']:.2f} m")
-        print(f"Saved results to: {OUTPUT_CSV}")
-
     except Exception as error:
+        print(f"[WARNING] Failed {crater_name}: {error}")
+    finally:
         plt.close("all")
-        print(f"\n[WARNING] Failed crater: {crater_name}")
-        print(f"[WARNING] Error: {error}")
-        print("Continuing to next crater...")
-
-print(f"\nFinished. Successfully fitted {len(results)} craters.")
-print(f"Results saved to: {OUTPUT_CSV}")
+    print(f"Successfully fitted {len(results)} craters.")
