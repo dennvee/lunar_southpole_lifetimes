@@ -13,16 +13,14 @@ PLOT_DIR = ROOT / "plots"
 nominal_radius = 500.0
 
 csv_files = [
-    "morphometry_vs_K_rim_35m_002.csv",
-    "morphometry_vs_K_rim_40m_002.csv",
-    "morphometry_vs_K_rim_45m_002.csv",
-    "morphometry_vs_K_rim_50m_002.csv",
-    "morphometry_vs_K_rim_55m_002.csv",
-    "morphometry_vs_K_rim_60m_002.csv"]
+    "morphometry_vs_K_rim_35m_renormalized_002.csv",
+    "morphometry_vs_K_rim_40m_renormalized_002.csv",
+    "morphometry_vs_K_rim_50m_renormalized_002.csv",
+    "morphometry_vs_K_rim_60m_renormalized_002.csv"]
 
-output_png = PLOT_DIR / f"curve_fit_rim_simulations_002.png"
-variance_png = PLOT_DIR / f"rim_variance_model_002.png"
-calibration_csv = DATA_DIR / f"rim_calibration_002.csv"
+output_png = PLOT_DIR / f"curve_fit_rim_simulations_002_local.png"
+variance_png = PLOT_DIR / f"rim_variance_model_002_local.png"
+calibration_csv = DATA_DIR / f"rim_calibration_002_local.csv"
 
 def func(x, y0, a, p):
     return y0 * (a / (x + a)) ** p
@@ -104,12 +102,22 @@ for (x, y, yerr, label), color in zip(datasets, colors):
 
 plt.plot(
     x_fit, y_fit, color="black", linewidth=2,
-    label=(
-        fr"Fit: "
-        fr"$y_0={y0:.4f}\pm{y0_err:.4f}$, "
-        fr"$a={a:.4f}\pm{a_err:.4f}$, "
-        fr"$p={p:.3f}\pm{p_err:.3f}$"))
+    label="Heteroskedastic fit") 
+equation = (
+    r'$\frac{h_{\rm rim}}{R_{\rm meas}} = '
+    r'y_0\left(\frac{a}{K/R^2+a}\right)^p$'
+    '\n'
+    rf'$y_0 = {y0:.4f} \pm {y0_err:.4f}$' '\n'
+    rf'$a = {a:.4f} \pm {a_err:.4f}$' '\n'
+    rf'$p = {p:.4f} \pm {p_err:.4f}$'
+)
 
+plt.text(
+    0.97, 0.97, equation,
+    transform=plt.gca().transAxes,
+    fontsize=11,
+    ha='right', va='top',
+    bbox=dict(facecolor='white', alpha=0.85, edgecolor='none'))
 plt.xlabel(r"Degradation state $K/R^2$")
 plt.ylabel(r"Rim height $h_{\rm rim}/R_{\rm meas}$")
 plt.title("Rim height vs. degradation state")

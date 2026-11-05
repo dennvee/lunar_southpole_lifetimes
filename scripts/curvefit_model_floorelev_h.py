@@ -10,10 +10,10 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / 'data'
 PLOT_DIR = ROOT / 'plots'
 nominal_radius = 500.0
-files = [f'morphometry_vs_K_rim_{h}m.csv' for h in (35, 40, 50, 60)]
-calibration_csv = DATA_DIR / f'floor_calibration.csv'
-plot_png = PLOT_DIR / f'floor_calibration.png'
-variance_png = PLOT_DIR / f'floor_variance.png'
+files = [f'morphometry_vs_K_rim_{h}m_renormalized_002.csv' for h in (35, 40, 50, 60)]
+calibration_csv = DATA_DIR / f'floor_calibration_002_local.csv'
+plot_png = PLOT_DIR / f'floor_calibration_002_local.png'
+variance_png = PLOT_DIR / f'floor_variance_002_local.png'
 
 def func(x, y0, a, p):
     return y0 * (a / (x + a)) ** p
@@ -67,6 +67,20 @@ for x, y, yerr, label in datasets:
 plt.fill_between(x_fit, np.maximum(y_fit - 1.96*s, 0), y_fit + 1.96*s, alpha=0.15, label='95% interval')
 plt.fill_between(x_fit, np.maximum(y_fit - s, 0), y_fit + s, alpha=0.25, label='68% interval')
 plt.plot(x_fit, y_fit, 'k-', lw=2, label='Heteroskedastic fit')
+equation = (
+    r'$\frac{|h_{\mathrm{floor}}|}{R} = '
+    r'y_0\left(\frac{a}{K/R^2+a}\right)^p$'
+    '\n'
+    rf'$y_0 = {y0:.4f} \pm {y0_err:.4f}$' '\n'
+    rf'$a = {a:.4f} \pm {a_err:.4f}$' '\n'
+    rf'$p = {p:.4f} \pm {p_err:.4f}$')
+plt.text(
+    0.97, 0.97, equation,
+    transform=plt.gca().transAxes,
+    fontsize=11,
+    ha='right', va='top',
+    bbox=dict(facecolor='white', alpha=0.85, edgecolor='none')
+)
 plt.xlabel(r'Degradation state $K/R^2$')
 plt.ylabel(r'Floor depth $|h_{floor}|/R_{meas}$')
 plt.legend(fontsize=8)
