@@ -10,10 +10,10 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / 'data'
 PLOT_DIR = ROOT / 'plots'
 nominal_radius = 500.0
-files = [f'morphometry_vs_K_rim_{h}m_renormalized_002.csv' for h in (35, 40, 50, 60)]
-calibration_csv = DATA_DIR / f'floor_calibration_002_local.csv'
-plot_png = PLOT_DIR / f'floor_calibration_002_local.png'
-variance_png = PLOT_DIR / f'floor_variance_002_local.png'
+files = [f'morphometry_vs_K_rim_{h}m_renormalized_003.csv' for h in (35, 40, 50,60)]
+calibration_csv = DATA_DIR / f'floor_calibration_003_local.csv'
+plot_png = PLOT_DIR / f'floor_calibration_003_local.png'
+variance_png = PLOT_DIR / f'floor_variance_003_local.png'
 
 def func(x, y0, a, p):
     return y0 * (a / (x + a)) ** p
@@ -22,7 +22,7 @@ def sigma_model(y, alpha, c):
     return np.exp(c / 2) * y ** (alpha / 2)
 
 datasets = []
-for h, filename in zip((35, 40, 50, 60), files):
+for h, filename in zip((35, 40,50,60), files):
     df = pd.read_csv(DATA_DIR / filename)
     x = df['K_over_R2'].to_numpy(dtype=float)
     radius = df['radius'].to_numpy(dtype=float)
@@ -79,8 +79,7 @@ plt.text(
     transform=plt.gca().transAxes,
     fontsize=11,
     ha='right', va='top',
-    bbox=dict(facecolor='white', alpha=0.85, edgecolor='none')
-)
+    bbox=dict(facecolor='white', alpha=0.85, edgecolor='none'))
 plt.xlabel(r'Degradation state $K/R^2$')
 plt.ylabel(r'Floor depth $|h_{floor}|/R_{meas}$')
 plt.legend(fontsize=8)

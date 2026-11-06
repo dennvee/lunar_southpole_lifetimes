@@ -6,11 +6,11 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-REAL_CSV = ROOT / 'data' / 'PSR_crater_morphometry_001.csv'
+REAL_CSV = ROOT / 'data' / 'real_crater_morphometry_majorpsrs_003.csv'
 nominal_radius = 500.0
-calibration_csv = ROOT /'data'/f'floor_calibration_R{nominal_radius:g}m.csv'
-output_csv = ROOT/'data'/ f'floor_K_heteroskedastic_R{nominal_radius:g}m_real_psrs.csv'
-output_png = ROOT/'plots'/f'floor_fit_R{nominal_radius:g}m_real_psrs.png'
+calibration_csv = ROOT /'data'/f'floor_calibration_003_local.csv'
+output_csv = ROOT/'data'/ f'floor_K_real_003_psrs.csv'
+output_png = ROOT/'plots'/f'floor_fit_003_local_real_psrs.png'
 
 def func(x, y0, a, p):
     return y0 * (a / (x + a)) ** p
