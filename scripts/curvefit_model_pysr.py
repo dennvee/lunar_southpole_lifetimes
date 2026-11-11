@@ -23,9 +23,10 @@ model = PySRRegressor(
     unary_operators=["exp"],
     random_state=42,
     deterministic=True,
-    parallelism="serial",)
+    parallelism="serial",
+)
 
-model.fit(X, y, variable_names=["K_over_R2"])
+model.fit(X, y, variable_names=["x"])
 
 eq = model.equations_
 simple_exp = eq[(eq["complexity"] <= 10) & eq["equation"].str.contains("exp", regex=False)]
@@ -44,16 +45,35 @@ X_line = x_line.reshape(-1, 1)
 colors = ["#f8bbd0", "#f48fb1", "#ec407a", "#ad1457"]
 
 fig, ax = plt.subplots(figsize=(11, 7))
-ax.scatter(x, y, color="navy", s=25, alpha=0.7, label="Simulation data", zorder=3)
+ax.scatter(x, y, color="navy", s=25, alpha=0.7,
+           label="Simulation data", zorder=3)
 
 equations = []
 for idx, color in zip(selected, colors):
     complexity = int(eq.loc[idx, "complexity"])
-    ax.plot(X_line[:, 0], model.predict(X_line, index=idx),
+
+    ax.plot(x_line, model.predict(X_line, index=idx),
             color=color, lw=2.5, label=f"Complexity {complexity}")
 
-    expression = sp.latex(model.sympy(index=idx))
-    equations.append(rf"$C={complexity}:\ y={expression}$")
+    expr = model.sympy(index=idx)
+    constants = list(dict.fromkeys(
+        node for node in sp.preorder_traversal(expr)
+        if isinstance(node, sp.Float)
+    ))
+
+    names = ["a", "p", "b", "c", "d", "e", "f", "g", "j", "k"]
+    parameters = [sp.Symbol(name) for name in names[:len(constants)]]
+
+    symbolic = expr.xreplace(dict(zip(constants, parameters)))
+    values = ", ".join(
+        rf"{name}={float(value):.4g}"
+        for name, value in zip(parameters, constants)
+    )
+
+    equations.append(
+        rf"$C={complexity}:\quad y={sp.latex(symbolic)}$"
+        + "\n" + rf"${values}$"
+    )
 
 ax.set_xlabel(r"$K/R^2$")
 ax.set_ylabel(r"$h_{\mathrm{rim}}/R$")
@@ -61,7 +81,11 @@ ax.set_title("PySR Rim Height Calibration")
 ax.legend()
 ax.grid(alpha=0.25)
 
-fig.text(0.5, -0.03, "\n".join(equations), ha="center", va="top", fontsize=9)
-fig.savefig(PLOT_DIR / "pysr_rim_calibration.png", dpi=300, bbox_inches="tight")
+fig.text(0.5, -0.03, "\n\n".join(equations),
+         ha="center", va="top", fontsize=9)
+
+fig.savefig(PLOT_DIR / "pysr_rim_calibration.png",
+            dpi=300, bbox_inches="tight")
 plt.close(fig)
+
 print(eq[["complexity", "loss", "score", "equation"]])
