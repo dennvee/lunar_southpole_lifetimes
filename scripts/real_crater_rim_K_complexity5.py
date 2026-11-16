@@ -10,19 +10,16 @@ DATA_DIR = ROOT / "data"
 PLOT_DIR = ROOT / "plots"
 PLOT_DIR.mkdir(exist_ok=True)
 
-real_csv = DATA_DIR / "real_crater_morphometry_majorpsrs_002.csv"
+real_csv = DATA_DIR / "real_crater_morphometry_001.csv"
 calibration_csv = DATA_DIR / "rim_calibration_complexity5_002.csv"
-output_png = PLOT_DIR / "real_rim_K_majorpsrs_complexity5_002.png"
-output_csv = DATA_DIR / "real_rim_K_majorpsrs_complexity5_002.csv"
-
+output_png = PLOT_DIR / "real_rim_K_majorpsrs_c5_psrs_002.png"
+output_csv = DATA_DIR / "real_rim_K_majorpsrs_c5_psrs_002.csv"
 
 def func(x, a, b):
     return a / (x + b)
 
-
 def sigma_model(y, alpha, c):
     return np.exp(c / 2) * y ** (alpha / 2)
-
 
 def invert_func(y, a, b, x_max):
     with np.errstate(divide="ignore", invalid="ignore"):

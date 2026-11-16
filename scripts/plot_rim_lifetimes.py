@@ -7,8 +7,8 @@ import pandas as pd
 from matplotlib.lines import Line2D
 
 ROOT = Path(__file__).resolve().parents[1]
-input_csv = ROOT / "data" / "rim_lifetimes_majorpsrs_complexity5_002.csv"
-output_png = ROOT / "plots" / "rim_lifetimes_majorpsrs_complexity5_002.png"
+input_csv = ROOT / "data" / "rim_lifetimes_majorpsrs_c5_psrs_002.csv"
+output_png = ROOT / "plots" / "rim_lifetimes_majorpsrs_c5_psrs_002.png"
 output_png.parent.mkdir(parents=True, exist_ok=True)
 
 real = pd.read_csv(input_csv)
