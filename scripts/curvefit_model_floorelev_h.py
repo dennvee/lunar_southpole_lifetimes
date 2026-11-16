@@ -10,10 +10,10 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / 'data'
 PLOT_DIR = ROOT / 'plots'
 nominal_radius = 500.0
-files = [f'morphometry_vs_K_rim_{h}m_renormalized_003.csv' for h in (35, 40, 50,60)]
-calibration_csv = DATA_DIR / f'floor_calibration_003_local.csv'
-plot_png = PLOT_DIR / f'floor_calibration_003_local.png'
-variance_png = PLOT_DIR / f'floor_variance_003_local.png'
+files = [f'morphometry_vs_K_rim_{h}m_renormalized_002.csv' for h in (35, 40, 50,60)]
+calibration_csv = DATA_DIR / f'floor_calibration_002_local.csv'
+plot_png = PLOT_DIR / f'floor_calibration_002_local.png'
+variance_png = PLOT_DIR / f'floor_variance_002_local.png'
 
 def func(x, y0, a, p):
     return y0 * (a / (x + a)) ** p
