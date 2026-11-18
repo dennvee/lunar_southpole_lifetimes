@@ -10,10 +10,10 @@ DATA_DIR = ROOT / "data"
 PLOT_DIR = ROOT / "plots"
 PLOT_DIR.mkdir(exist_ok=True)
 
-real_csv = DATA_DIR / "real_crater_morphometry_001.csv"
-calibration_csv = DATA_DIR / "rim_calibration_complexity5_002.csv"
-output_png = PLOT_DIR / "real_rim_K_majorpsrs_c5_psrs_002.png"
-output_csv = DATA_DIR / "real_rim_K_majorpsrs_c5_psrs_002.csv"
+real_csv = DATA_DIR / "real_crater_morphometry_majorpsr_test.csv"
+calibration_csv = DATA_DIR / "rim_calibration_complexity5_test.csv"
+output_png = PLOT_DIR / "real_rim_K_majorpsrs_complexity5_test.png"
+output_csv = DATA_DIR / "real_rim_K_majorpsrs_complexity5_test.csv"
 
 def func(x, a, b):
     return a / (x + b)
@@ -26,12 +26,10 @@ def invert_func(y, a, b, x_max):
         x = a / y - b
     return np.where(np.isfinite(y) & (y > 0) & (x >= 0) & (x <= x_max), x, np.nan)
 
-
 def invert_curve(y, curve, x_grid):
     if not np.isfinite(y) or y < curve.min() or y > curve.max():
         return np.nan
     return np.interp(y, curve[::-1], x_grid[::-1])
-
 
 calibration = pd.read_csv(calibration_csv).iloc[0]
 a, b = float(calibration["a"]), float(calibration["b"])

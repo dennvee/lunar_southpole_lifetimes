@@ -5,8 +5,8 @@ ROOT = Path(__file__).resolve().parents[1]
 rim_heights = [35, 40,45, 50,55, 60]
 
 for rim_height in rim_heights:
-    input_csv = ROOT/ "data" / f"morphometry_vs_K_rim_{rim_height}m_003.csv"
-    output_csv = ROOT/ "data" / f"morphometry_vs_K_rim_{rim_height}m_renormalized_003.csv"
+    input_csv = ROOT/ "data" / f"morphometry_vs_K_rim_{rim_height}m_004.csv"
+    output_csv = ROOT/ "data" / f"morphometry_vs_K_rim_{rim_height}m_renormalized_004.csv"
 
     df = pd.read_csv(input_csv)
     R = df["radius"]
