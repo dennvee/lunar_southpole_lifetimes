@@ -62,8 +62,7 @@ plt.plot(x_fit, y_fit, "k-", lw=2, label="Complexity-6 fit")
 label = (
     r"$|h_{\mathrm{floor}}|/R=Ae^{-a(K/R^2)}$" "\n"
     rf"$A={A:.6f}\pm{A_err:.6f}$" "\n"
-    rf"$a={a:.6f}\pm{a_err:.6f}$"
-)
+    rf"$a={a:.6f}\pm{a_err:.6f}$")
 plt.text(0.97, 0.97, label, transform=plt.gca().transAxes,
          ha="right", va="top", fontsize=11,
          bbox=dict(facecolor="white", alpha=0.85, edgecolor="none"))
