@@ -2,13 +2,13 @@ from pathlib import Path
 import sys
 import cratermaker as cm
 ROOT = Path(__file__).resolve().parents[1]
-simdir = ROOT / "simulation_directories" / f"mc_test5"
+simdir = ROOT / "simulation_directories" / f"mc_test_again"
 
 local_location = (0.0, -89.999)
 local_radius_m = 150000
 pix = 750
 
-run_age_My = 1000
+run_age_My = 4310
 time_interval_My = 10
 largest_crater_m = 200000
 rng_seed= 248

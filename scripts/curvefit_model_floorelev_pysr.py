@@ -52,6 +52,8 @@ pd.DataFrame([{
 x_fit = np.linspace(x.min(), x.max(), 1000)
 y_fit = func(x_fit, *popt)
 s = sigma_model(y_fit, alpha, c)
+
+
 plt.figure(figsize=(8, 6))
 plt.scatter(x, y, color="navy", s=20, alpha=0.7, label="Binned simulation means")
 plt.fill_between(x_fit, np.maximum(y_fit - 1.96 * s, 0), y_fit + 1.96 * s,
