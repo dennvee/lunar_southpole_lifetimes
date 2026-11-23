@@ -2,7 +2,7 @@ from pathlib import Path
 import sys
 import cratermaker as cm
 ROOT = Path(__file__).resolve().parents[1]
-simdir = ROOT / "simulation_directories" / f"mc_test_again_basins"
+simdir = ROOT / "simulation_directories" / f"mc_test_again_basins_002"
 
 local_location = (0.0, -89.99)
 local_radius_m = 150000

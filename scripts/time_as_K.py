@@ -7,16 +7,15 @@ from morphometry import (
 
 scriptdir = Path(__file__).resolve().parent
 rootdir = scriptdir.parent
-datadir = rootdir / "data_Kvst"
-simrootdir = rootdir / "simdata_Kvst"
-plotdir = rootdir / "plots_Kvst"
+datadir = rootdir / "data"/ "data_Kvst"
+simrootdir = rootdir / "simulation_directories" / "simdata_Kvst"
+plotdir = rootdir/ "plots" / "plots_Kvst"
 diameter = 1e3
 
 diam_str = (
     format_large_units(diameter, quantity="length").replace(".", "_").replace(" ", "_")
 )
 simdir = simrootdir / f"time_as_K_D{diam_str}"
-
 local_radius = diameter
 pix = local_radius / 250.0
 sim = Simulation(
@@ -30,13 +29,11 @@ sim = Simulation(
     reset=True,
     rng_seed=1128302)
 
-# This is our test crater, scaled to take up most of the local region.
 crater = sim.emplace(
     name=diam_str,
     diameter=diameter,
     location=sim.surface.local.location,
-    monte_carlo=False,  # Use nominal values for the test crater
-)[0]
+    monte_carlo=False, )[0]
 
 original_diameter = crater.diameter
 original_radius = crater.radius
