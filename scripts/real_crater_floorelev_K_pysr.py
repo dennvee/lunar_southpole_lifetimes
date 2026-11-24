@@ -80,7 +80,7 @@ plt.text(0.98, 0.98, label, transform=plt.gca().transAxes,
          bbox=dict(facecolor="white", alpha=0.85, edgecolor="none"))
 plt.xlabel(r"Degradation state $K/R^2$")
 plt.ylabel(r"Floor depth $|h_{\mathrm{floor}}|/R_{\mathrm{meas}}$")
-plt.title("Real crater floor-depth degradation — complexity 6")
+plt.title("Real crater floor-depth degradation")
 plt.legend(fontsize=8)
 plt.grid(alpha=0.3)
 plt.tight_layout()

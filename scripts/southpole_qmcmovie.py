@@ -5,7 +5,7 @@ import imageio.v2 as imageio
 ROOT = Path(__file__).resolve().parents[1]
 rng_seed = int(sys.argv[1])
 
-image_dir = ROOT / "simulation_directories" / f"lunar_sp_seed_{rng_seed:03d}" / "surface_images"
+image_dir = ROOT / "simulation_directories" / f"southpole_{rng_seed:03d}" / "surface_images"
 output_dir = ROOT / "plots" / "southpole_movies"
 output_dir.mkdir(parents=True, exist_ok=True)
 output_file = output_dir / f"lunar_sp_seed_{rng_seed:03d}.mp4"
