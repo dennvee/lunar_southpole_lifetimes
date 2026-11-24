@@ -10,10 +10,10 @@ DATA_DIR = ROOT / "data"
 PLOT_DIR = ROOT / "plots"
 PLOT_DIR.mkdir(exist_ok=True)
 
-real_csv = DATA_DIR / "real_crater_morphometry_majorpsr_test.csv"
-calibration_csv = DATA_DIR / "rim_calibration_complexity5_test.csv"
-output_png = PLOT_DIR / "real_rim_K_majorpsrs_complexity5_test.png"
-output_csv = DATA_DIR / "real_rim_K_majorpsrs_complexity5_test.csv"
+real_csv = DATA_DIR / "real_crater_morphometry_localpsr_test.csv"
+calibration_csv = DATA_DIR / "rim_calibration_complexity5_003.csv"
+output_png = PLOT_DIR / "real_rim_K_localpsrs_c5_test.png"
+output_csv = DATA_DIR / "real_rim_K_localpsrs_c5_test.csv"
 
 def func(x, a, b):
     return a / (x + b)

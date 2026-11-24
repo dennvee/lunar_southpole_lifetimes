@@ -10,10 +10,10 @@ DATA_DIR = ROOT / "data"
 PLOT_DIR = ROOT / "plots"
 PLOT_DIR.mkdir(exist_ok=True)
 
-real_csv = DATA_DIR / "real_crater_morphometry_majorpsr_test.csv"
+real_csv = DATA_DIR / "real_crater_morphometry_localpsr_test.csv"
 calibration_csv = DATA_DIR / "floor_calibration_complexity6_mean_004.csv"
-output_csv = DATA_DIR / "real_floor_K_majorpsrs_c6_mean_004.csv"
-output_png = PLOT_DIR / "real_floor_K_majorpsrs_c6_mean_004.png"
+output_csv = DATA_DIR / "real_floor_K_localpsrs_c6_mean_004.csv"
+output_png = PLOT_DIR / "real_floor_K_localpsrs_c6_mean_004.png"
 
 def func(x, A, a):
     return A * np.exp(-a * x)

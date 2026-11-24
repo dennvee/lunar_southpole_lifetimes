@@ -12,9 +12,9 @@ PLOT_DIR = ROOT / "plots"
 PLOT_DIR.mkdir(exist_ok=True)
 
 heights = [35, 40, 50, 60]
-calibration_csv = DATA_DIR / "rim_calibration_complexity5_002.csv"
-output_png = PLOT_DIR / "curve_fit_rim_complexity5_002.png"
-variance_png = PLOT_DIR / "rim_variance_complexity5_002.png"
+calibration_csv = DATA_DIR / "rim_calibration_complexity5_003.csv"
+output_png = PLOT_DIR / "curve_fit_rim_complexity5_003.png"
+variance_png = PLOT_DIR / "rim_variance_complexity5_003.png"
 
 
 def func(x, a, b):
@@ -25,7 +25,7 @@ def sigma_model(y, alpha, c):
 
 datasets = []
 for h in heights:
-    df = pd.read_csv(DATA_DIR / f"morphometry_vs_K_rim_{h}m_renormalized_002.csv")
+    df = pd.read_csv(DATA_DIR / f"morphometry_vs_K_rim_{h}m_renormalized_003.csv")
     x = df["K_over_R2"].to_numpy(dtype=float)
     radius = df["radius"].to_numpy(dtype=float)
     y = df["rim_height"].to_numpy(dtype=float) / radius
